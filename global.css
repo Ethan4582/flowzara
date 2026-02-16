@@ -83,6 +83,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.4;
   font-size: 14px;
+   scroll-behavior: smooth;
 }
 
 /* common utilities */
