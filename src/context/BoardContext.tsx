@@ -4,7 +4,7 @@ import React, { createContext, useContext, useReducer, useEffect, useRef } from 
 import type { Task, Activity, ColumnId, BoardState } from '@/src/types';
 import { getItem, setItem } from '@/src/utils/storage';
 
-const BOARD_KEY = 'flowzara_board';
+const BOARD_KEY = 'cluster_board';
 const MAX_ACTIVITIES = 50;
 
 

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import type { Task, Priority, ColumnId } from '@/src/types';
 
 interface TaskFormProps {
-  task?: Task | null;            
+  task?: Task | null;
   defaultColumn?: ColumnId;
   onSubmit: (data: {
     title: string;
@@ -34,7 +34,6 @@ export default function TaskForm({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-  
     if (!title.trim()) {
       setError('Title is required.');
       return;
@@ -59,54 +58,46 @@ export default function TaskForm({
 
   return (
     <div
-      style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'rgba(0,0,0,0.4)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 100,
-      }}
+      className="fixed inset-0  flex items-center justify-center z-50"
       onClick={onCancel}
     >
       <form
         onClick={(e) => e.stopPropagation()}
         onSubmit={handleSubmit}
-        className="card"
-        style={{ width: 440, padding: 24 }}
+        className="bg-white rounded-lg shadow-lg p-6 w-[440px]"
       >
-        <h3 style={{ marginTop: 0, marginBottom: 16 }}>
+        <h3 className="text-lg font-semibold mt-0 mb-4">
           {task ? 'Edit Task' : 'New Task'}
         </h3>
 
-        {error && <p style={{ color: 'var(--danger)', fontSize: 13, margin: '0 0 12px' }}>{error}</p>}
+        {error && (
+          <p className="text-red-600 text-sm mb-3">
+            {error}
+          </p>
+        )}
 
-        <label className="small">Title *</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
         <input
-          className="input"
-          style={{ width: '100%', marginBottom: 12 }}
+          className="w-full border border-gray-300 rounded px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Task title"
           autoFocus
         />
 
-        <label className="small">Description</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
         <textarea
-          className="input"
-          style={{ width: '100%', marginBottom: 12, minHeight: 60, resize: 'vertical' }}
+          className="w-full border border-gray-300 rounded px-3 py-2 mb-3 min-h-[60px] resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Optional description"
         />
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 12 }}>
-          <div style={{ flex: 1 }}>
-            <label className="small">Priority</label>
+        <div className="flex gap-3 mb-3">
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
             <select
-              className="input"
-              style={{ width: '100%' }}
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={priority}
               onChange={(e) => setPriority(e.target.value as Priority)}
             >
@@ -115,11 +106,10 @@ export default function TaskForm({
               <option value="high">High</option>
             </select>
           </div>
-          <div style={{ flex: 1 }}>
-            <label className="small">Column</label>
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Column</label>
             <select
-              className="input"
-              style={{ width: '100%' }}
+              className="w-3/4 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={columnId}
               onChange={(e) => setColumnId(e.target.value as ColumnId)}
             >
@@ -130,29 +120,34 @@ export default function TaskForm({
           </div>
         </div>
 
-        <label className="small">Due Date</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
         <input
-          className="input"
+          className="w-full border border-gray-300 rounded px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="date"
-          style={{ width: '100%', marginBottom: 12 }}
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
         />
 
-        <label className="small">Tags (comma-separated)</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Tags (comma-separated)</label>
         <input
-          className="input"
-          style={{ width: '100%', marginBottom: 20 }}
+          className="w-full border border-gray-300 rounded px-3 py-2 mb-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={tagsStr}
           onChange={(e) => setTagsStr(e.target.value)}
           placeholder="e.g. urgent, frontend"
         />
 
-        <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
-          <button type="button" className="btn secondary" onClick={onCancel}>
+        <div className="flex gap-2 justify-end">
+          <button
+            type="button"
+            className="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onClick={onCancel}
+          >
             Cancel
           </button>
-          <button type="submit" className="btn">
+          <button
+            type="submit"
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
             {task ? 'Save' : 'Create'}
           </button>
         </div>

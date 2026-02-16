@@ -3,8 +3,8 @@ import "./globals.css";
 import { AuthProvider } from "@/src/context/AuthContext";
 
 export const metadata: Metadata = {
-  title: "Flowzara — Task Board",
-  description: "Task board assignment built with Next.js",
+  title: "Cluster— Task Board",
+  description: "Task board to tack your work",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -13,8 +13,8 @@ import { getItem, setItem, removeItem } from '@/src/utils/storage';
 const VALID_EMAIL = 'intern@demo.com';
 const VALID_PASSWORD = 'intern123';
 
-const AUTH_KEY = 'flowzara_auth';
-export const REMEMBER_KEY = 'flowzara_remember';
+const AUTH_KEY = 'cluster_auth';
+export const REMEMBER_KEY = 'cluster_remember';
 
 interface AuthContextType {
   isAuthenticated: boolean;
