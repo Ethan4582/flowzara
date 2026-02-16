@@ -139,7 +139,7 @@ function BoardContent() {
         />
 
       <div className="relative z-10 container py-6">
-        {/* ── Header ── */}
+       
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
           <div>
             <h1 style={{ margin: 0, fontSize: 22 }}>📋 Task Board</h1>

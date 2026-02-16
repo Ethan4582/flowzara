@@ -11,7 +11,7 @@ function BoardHarness() {
       <span data-testid="activity-count">{state.activities.length}</span>
       <span data-testid="last-activity">{state.activities[0]?.message ?? ''}</span>
 
-      {/* render task titles */}
+     
       {state.tasks.map((t) => (
         <span key={t.id} data-testid={`task-${t.id}`} data-column={t.columnId}>
           {t.title}

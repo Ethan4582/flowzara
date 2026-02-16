@@ -50,7 +50,7 @@ export default function FeaturesPage() {
 
   return (
     <div className="grid place-items-center">
-      {/* Section 1 */}
+    
       <section>
         <div className="pt-0 px-[15px] pb-[120px]">
           <div className="mx-auto w-full max-w-[1140px]">
@@ -66,7 +66,7 @@ export default function FeaturesPage() {
               </div>
             </div>
 
-            {/* Video / image block */}
+           
             <div className="mb-12">
               <div className="relative overflow-hidden rounded-3xl">
                <img
@@ -93,7 +93,7 @@ export default function FeaturesPage() {
               </div>
             </div>
 
-            {/* Counters row */}
+           
             <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-4">
               {counters.map((counter, index) => (
                 <CounterBlock key={index} label={counter.label} digits={counter.digits} />
@@ -103,12 +103,12 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      {/* Section 2 */}
+    
       <section>
         <div className="pt-0 px-[15px] pb-[120px]">
           <div className="mx-auto w-full max-w-[1140px]">
             <div className="flex flex-col gap-[120px]">
-              {/* Feature 1 */}
+             
               <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8 md:gap-[113px]">
                 <div>
                   <h2 className="font-bold text-3xl md:text-[48px] leading-[1.2] mb-6">
@@ -153,7 +153,7 @@ export default function FeaturesPage() {
                 </div>
               </div>
 
-              {/* Feature 2 */}
+            
               <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8 md:gap-[113px]">
                 <div
                 >
@@ -202,7 +202,7 @@ export default function FeaturesPage() {
                 </div>
               </div>
 
-              {/* Feature 3 */}
+             
               <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8 md:gap-[113px]">
                 <div>
                   <h2 className="font-bold text-3xl md:text-[48px] leading-[1.2] mb-6">
