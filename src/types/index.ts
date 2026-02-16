@@ -1,7 +1,6 @@
-/** Priority levels for tasks */
+
 export type Priority = 'low' | 'medium' | 'high';
 
-/** Fixed column identifiers */
 export type ColumnId = 'todo' | 'doing' | 'done';
 
 /** Task model */
@@ -10,9 +9,9 @@ export interface Task {
   title: string;
   description: string;
   priority: Priority;
-  dueDate: string;       // ISO date string or ''
+  dueDate: string;      
   tags: string[];
-  createdAt: string;     // ISO timestamp
+  createdAt: string;     
   columnId: ColumnId;
 }
 
@@ -20,7 +19,7 @@ export interface Task {
 export interface Activity {
   id: string;
   message: string;
-  timestamp: string;     // ISO timestamp
+  timestamp: string;    
 }
 
 /** Full board state persisted to localStorage */

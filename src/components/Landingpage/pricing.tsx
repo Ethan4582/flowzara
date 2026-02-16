@@ -3,16 +3,16 @@ export default function PricingPage() {
     <section className="relative z-[2]">
       <div className="px-4 py-0 pb-[120px] md:px-[15px]">
         <div className="mx-auto w-full max-w-[1140px]">
-          {/* Header */}
+       
           <div className="mx-auto mb-[60px] max-w-[708px] text-center">
             <h2 className="text-center text-4xl font-bold leading-tight md:text-[48px] md:leading-[57.6px]">
               Simple, Transparent Pricing for Task Masters
             </h2>
           </div>
 
-          {/* Pricing Cards */}
+      
           <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3">
-            {/* Standard Plan */}
+          
             <div className="rounded-2xl bg-white/70 backdrop-blur-[54px] px-6 py-10 md:px-[30px]">
               <div className="mb-[22px]">
                 <div className="mb-4">
@@ -20,7 +20,7 @@ export default function PricingPage() {
                 </div>
                 <div className="mb-1 flex items-end justify-start">
                   <h3 className="text-5xl font-bold leading-[65.52px] md:text-[56px]">
-                    $199
+                    $10
                   </h3>
                   <div className="ml-[2px] mb-[10px]">USD</div>
                 </div>
@@ -66,7 +66,7 @@ export default function PricingPage() {
               </div>
             </div>
 
-            {/* Premium Plan (Highlighted) */}
+        
             <div className="rounded-2xl bg-[#584EFE] px-6 py-10 text-white backdrop-blur-[54px] md:px-[30px]">
               <div className="mb-[22px]">
                 <div className="mb-4">
@@ -74,7 +74,7 @@ export default function PricingPage() {
                 </div>
                 <div className="mb-1 flex items-end justify-start">
                   <h3 className="text-5xl font-bold leading-[65.52px] md:text-[56px]">
-                    $259
+                    $50
                   </h3>
                   <div className="ml-[2px] mb-[10px]">USD</div>
                 </div>
@@ -130,7 +130,6 @@ export default function PricingPage() {
               </div>
             </div>
 
-            {/* Agency Plan */}
             <div className="rounded-2xl bg-white/70 px-6 py-10 backdrop-blur-[54px] md:px-[30px]">
               <div className="mb-[22px]">
                 <div className="mb-4">
@@ -138,7 +137,7 @@ export default function PricingPage() {
                 </div>
                 <div className="mb-1 flex items-end justify-start">
                   <h3 className="text-5xl font-bold leading-[65.52px] md:text-[56px]">
-                    $699
+                    $200
                   </h3>
                   <div className="ml-[2px] mb-[10px]">USD</div>
                 </div>
@@ -187,14 +186,13 @@ export default function PricingPage() {
         </div>
       </div>
 
-      {/* Background blur elements (unchanged) */}
       <div className="absolute bottom-[116px] left-[8%] -z-10 h-[576px] w-[584px] rounded-[21.375rem] bg-[rgba(88,78,254,0.32)] blur-[250px]"></div>
       <div className="absolute bottom-[116px] right-[18%] -z-10 h-[537px] w-[558px] rounded-[21.375rem] bg-[rgba(60,135,255,0.43)] blur-[250px]"></div>
     </section>
   );
 }
 
-// Reusable feature item component
+
 function FeatureItem({
   icon,
   text,

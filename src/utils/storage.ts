@@ -1,6 +1,4 @@
-/**
- * Safe localStorage wrapper — handles SSR, missing keys, and corrupt data.
- */
+
 
 export function getItem<T>(key: string, fallback: T): T {
   if (typeof window === 'undefined') return fallback;
@@ -18,7 +16,7 @@ export function setItem<T>(key: string, value: T): void {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch {
-    // localStorage may be full or unavailable
+    
   }
 }
 
@@ -27,6 +25,6 @@ export function removeItem(key: string): void {
   try {
     localStorage.removeItem(key);
   } catch {
-    // ignore
+    
   }
 }

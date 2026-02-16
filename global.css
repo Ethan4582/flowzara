@@ -209,19 +209,37 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Marquee helpers to keep long inline content clipped inside viewport */
+
+/* Marquee animation */
 .marquee {
   width: 100%;
   overflow: hidden;
 }
-.marquee-row {
+
+.marquee-track {
   display: inline-flex;
-  gap: 40px;
   align-items: center;
-  width: max-content; /* allows duplicates to sit inline but remain clipped by .marquee */
+  gap: 40px;
+  width: max-content;
+  will-change: transform;
+  animation: marquee 20s linear infinite;
 }
+
+.marquee-track.reverse {
+  animation-direction: reverse;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 @media (min-width: 768px) {
-  .marquee-row { gap: 75px; }
+  .marquee-track {
+    gap: 75px;
+  }
 }
-
-

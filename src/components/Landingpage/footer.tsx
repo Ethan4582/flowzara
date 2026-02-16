@@ -5,16 +5,16 @@ const Footer = () => {
     <div className="grid place-items-center">
       <footer className="pt-0 pr-0 pb-[30px] pl-0">
         <div className="mx-auto w-full max-w-[1170px] px-[15px]">
-          {/* Main content */}
+        
           <div className="mb-[60px]">
-            {/* Desktop: row, Mobile: column */}
+            
             <div className="flex flex-col lg:flex-row justify-between gap-8 lg:gap-[130px]">
-              {/* Left column - Brand */}
+            
               <div className="w-full max-w-[310px]">
                 <div className="mb-6">
                   <a href="/" className="inline-block max-w-full">
                     <img
-                      alt="TaskFlow Logo"
+                      alt="Clsuter Logo"
                       src="https://storage.googleapis.com/download/storage/v1/b/prd-shared-services.firebasestorage.app/o/h2m-assets%2F539449bde20209dda1b0a4149fd3b3389c452bfc.svg?generation=1771149970869240&amp;alt=media"
                       className="block max-w-full"
                     />
@@ -27,7 +27,7 @@ const Footer = () => {
                     collaborate seamlessly.
                   </p>
                 </div>
-                {/* Social Icons */}
+                
                 <div className="flex items-center justify-start mb-9 gap-6">
                   <a
                     href="https://ash-cv.vercel.app/"
@@ -73,7 +73,7 @@ const Footer = () => {
                     </div>
                   </a>
                 </div>
-                {/* CTA Button */}
+           
                 <a
                   href="/signup"
                   className="inline-flex items-center font-bold justify-center max-w-full overflow-hidden relative bg-[#584EFE] text-white gap-0 leading-[23.94px] py-[14px] px-7 z-[2] rounded-lg"
@@ -82,9 +82,8 @@ const Footer = () => {
                 </a>
               </div>
 
-              {/* Right column - Links */}
               <div className="flex flex-col sm:flex-row justify-between w-full gap-8 sm:gap-[80px] max-w-[700px]">
-                {/* Company */}
+             
                 <div className="w-full max-w-[154px]">
                   <div className="font-semibold mb-4 leading-[27.9px]">
                     Company
@@ -108,7 +107,7 @@ const Footer = () => {
                   </div>
                 </div>
 
-                {/* Resources (formerly Template) */}
+               
                 <div className="w-full max-w-[154px]">
                   <div className="font-semibold mb-4 leading-[27.9px]">
                     Resources
@@ -132,7 +131,7 @@ const Footer = () => {
                   </div>
                 </div>
 
-                {/* Contact */}
+             
                 <div className="w-full max-w-[230px]">
                   <div className="font-semibold mb-4 leading-[27.9px]">
                     Contact
@@ -156,10 +155,10 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Bottom row */}
+      
           <div className="flex flex-col sm:flex-row justify-between gap-4 sm:gap-[30px] text-sm text-gray-600">
             <div>
-              © 2025 TaskFlow. All rights reserved.{" "}
+              © 2025 Clsuter. All rights reserved.{" "}
               <a
                 href="https://github.com/Ethan4582"
                 target="_blank"
