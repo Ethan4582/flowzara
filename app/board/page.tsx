@@ -11,6 +11,11 @@ import TaskForm from '@/src/components/TaskForm';
 import SearchFilter from '@/src/components/SearchFilter';
 import ActivityLog from '@/src/components/ActivityLog';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ThemeProvider } from '@/src/context/ThemeContext';
+// Theme imports (added)
+import { useTheme } from '@/src/context/ThemeContext';
+import MatrixTheme from '@/src/components/themes/MatrixTheme';
+import ThemeSwitcher from '@/src/components/ThemeSwitcher';
 
 /* ── Column config ── */
 const COLUMNS: { id: ColumnId; title: string }[] = [
@@ -31,6 +36,7 @@ function BoardContent() {
   const { state, dispatch } = useBoard();
   const { email, logout } = useAuth();
   const router = useRouter();
+  const { currentTheme } = useTheme();
 
   /* ── UI state ── */
   const [search, setSearch] = useState('');
@@ -126,118 +132,135 @@ function BoardContent() {
   );
 
   return (
-    <div className="container">
-      {/* ── Header ── */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-        <div>
-          <h1 style={{ margin: 0, fontSize: 22 }}>📋 Task Board</h1>
-          <p className="small" style={{ margin: '4px 0 0' }}>
-            Signed in as <strong>{email}</strong>
-          </p>
-        </div>
-
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          {/* Activity Log: hover popover */}
-          <div
-            style={{ position: 'relative', display: 'inline-block' }}
-            onMouseEnter={() => setShowActivityPopover(true)}
-            onMouseLeave={() => setShowActivityPopover(false)}
-            aria-haspopup="true"
-            aria-expanded={showActivityPopover}
-          >
-            <button
-              className="btn secondary"
-              style={{
-                transition: 'background-color 140ms, color 140ms',
-                background: showActivityPopover ? 'var(--color-primary)' : undefined,
-                color: showActivityPopover ? 'var(--text-inverse)' : undefined,
-                borderColor: showActivityPopover ? 'transparent' : undefined,
-              }}
-            >
-              Activity Log
-            </button>
-
-            <AnimatePresence>
-              {showActivityPopover && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -6, scale: 0.98 }}
-                  transition={{ duration: 0.12 }}
-                  style={{
-                    position: 'absolute',
-                    right: 0,
-                    top: 'calc(100% + 8px)',
-                    width: 320,
-                    zIndex: 60,
-                  }}
-                >
-                  {/* let ActivityLog render the white card & handle scrolling to avoid nested padding/scrollbars */}
-                  <ActivityLog activities={state.activities} />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          <button className="btn secondary" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      </div>
-
-      {/* ── Controls ── */}
-      <SearchFilter
-        search={search}
-        onSearchChange={setSearch}
-        priorityFilter={priorityFilter}
-        onPriorityChange={setPriorityFilter}
-        sortByDueDate={sortDue}
-        onSortToggle={() => setSortDue(!sortDue)}
-        onReset={handleReset}
-      />
-
-      {/* Previously displayed activity card removed — replaced by hover popover above */}
-
-      {/* ── Board columns ── */}
-      <div className="board">
-        {COLUMNS.map((col) => (
-          <Column
-            key={col.id}
-            columnId={col.id}
-            title={col.title}
-            tasks={columnTasks[col.id]}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-            onAddTask={handleAddTask}
-            onDragStart={handleDragStart}
-            onDrop={handleDrop}
-          />
-        ))}
-      </div>
-
-      {/* ── Task Form Modal ── */}
-      {formOpen && (
-        <TaskForm
-          task={editingTask}
-          defaultColumn={defaultCol}
-          onSubmit={handleFormSubmit}
-          onCancel={() => {
-            setFormOpen(false);
-            setEditingTask(null);
-          }}
+    <div className="relative min-h-screen">
+      {/* Background layer */}
+      {currentTheme?.id === 'matrix' ? (
+        <MatrixTheme />
+      ) : (
+        <div
+          className={`absolute inset-0 ${currentTheme?.backgroundClass || ''}`}
+          style={currentTheme?.backgroundStyle}
         />
       )}
+
+      {/* Foreground content */}
+      <div className="relative z-10 container py-6">
+        {/* ── Header ── */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+          <div>
+            <h1 style={{ margin: 0, fontSize: 22 }}>📋 Task Board</h1>
+            <p className="small" style={{ margin: '4px 0 0' }}>
+              Signed in as <strong>{email}</strong>
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            {/* ThemeSwitcher before Activity Log */}
+            <ThemeSwitcher />
+
+            {/* Activity Log: hover popover */}
+            <div
+              style={{ position: 'relative', display: 'inline-block' }}
+              onMouseEnter={() => setShowActivityPopover(true)}
+              onMouseLeave={() => setShowActivityPopover(false)}
+              aria-haspopup="true"
+              aria-expanded={showActivityPopover}
+            >
+              <button
+                className="btn secondary"
+                style={{
+                  transition: 'background-color 140ms, color 140ms',
+                  background: showActivityPopover ? 'var(--color-primary)' : undefined,
+                  color: showActivityPopover ? 'var(--text-inverse)' : undefined,
+                  borderColor: showActivityPopover ? 'transparent' : undefined,
+                }}
+              >
+                Activity Log
+              </button>
+
+              <AnimatePresence>
+                {showActivityPopover && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                    transition={{ duration: 0.12 }}
+                    style={{
+                      position: 'absolute',
+                      right: 0,
+                      top: 'calc(100% + 8px)',
+                      width: 320,
+                      zIndex: 60,
+                    }}
+                  >
+                    {/* ActivityLog provides the card and scroll handling */}
+                    <ActivityLog activities={state.activities} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <button className="btn secondary" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+        </div>
+
+        {/* ── Controls ── */}
+        <SearchFilter
+          search={search}
+          onSearchChange={setSearch}
+          priorityFilter={priorityFilter}
+          onPriorityChange={setPriorityFilter}
+          sortByDueDate={sortDue}
+          onSortToggle={() => setSortDue(!sortDue)}
+          onReset={handleReset}
+        />
+
+        {/* ── Board columns ── */}
+        <div className="board">
+          {COLUMNS.map((col) => (
+            <Column
+              key={col.id}
+              columnId={col.id}
+              title={col.title}
+              tasks={columnTasks[col.id]}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              onAddTask={handleAddTask}
+              onDragStart={handleDragStart}
+              onDrop={handleDrop}
+            />
+          ))}
+        </div>
+
+        {/* ── Task Form Modal ── */}
+        {formOpen && (
+          <TaskForm
+            task={editingTask}
+            defaultColumn={defaultCol}
+            onSubmit={handleFormSubmit}
+            onCancel={() => {
+              setFormOpen(false);
+              setEditingTask(null);
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 }
 
-/** Board page wrapped with providers and auth guard */
+
+
 export default function BoardPage() {
   return (
     <ProtectedRoute>
-      <BoardProvider>
-        <BoardContent />
-      </BoardProvider>
+      <ThemeProvider>
+        <BoardProvider>
+          <BoardContent />
+        </BoardProvider>
+      </ThemeProvider>
     </ProtectedRoute>
   );
 }
