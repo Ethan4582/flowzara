@@ -13,7 +13,7 @@ export default function LandingPage() {
          <AboutPage/>
          <PricingPage/>
          <Footer/>
-        
+    
     </div>
   );
 }

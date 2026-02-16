@@ -203,4 +203,25 @@ body {
   .board { grid-template-columns: 1fr; }
 }
 
+/* Prevent global horizontal scrolling caused by transformed children */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Marquee helpers to keep long inline content clipped inside viewport */
+.marquee {
+  width: 100%;
+  overflow: hidden;
+}
+.marquee-row {
+  display: inline-flex;
+  gap: 40px;
+  align-items: center;
+  width: max-content; /* allows duplicates to sit inline but remain clipped by .marquee */
+}
+@media (min-width: 768px) {
+  .marquee-row { gap: 75px; }
+}
+
 

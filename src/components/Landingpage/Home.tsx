@@ -27,8 +27,9 @@ const MARQUEE_ROW_2 = [
 ];
 
 const HeroImages = () => (
-  <div className="grid grid-rows-[auto] gap-5" style={{ gridTemplateColumns: '1fr 1.25fr' }}>
-    <div className="grid grid-cols-1 grid-rows-[auto] gap-4 md:gap-[16px]">
+  // Stack on mobile, two columns on desktop (original ratio preserved)
+  <div className="grid grid-cols-1 md:grid-cols-[1fr_1.25fr] gap-5">
+    <div className="grid grid-cols-1 gap-4 md:gap-[16px]">
       <img
         alt="Hero Image"
         src="https://storage.googleapis.com/download/storage/v1/b/prd-shared-services.firebasestorage.app/o/h2m-assets%2F116fb82347e0b8a792ad6c7316f5902df482a1ac.webp?generation=1771149970978799&alt=media"
@@ -40,7 +41,7 @@ const HeroImages = () => (
         className="inline-block max-w-full overflow-clip align-middle rounded-[0.8125rem]"
       />
     </div>
-    <div className="grid grid-cols-1 grid-rows-[auto] gap-5 md:gap-[20px]">
+    <div className="grid grid-cols-1 gap-5 md:gap-[20px]">
       <img
         alt="Hero Image"
         src="https://storage.googleapis.com/download/storage/v1/b/prd-shared-services.firebasestorage.app/o/h2m-assets%2F6223785f794c24c503cf4fb8afdb507745ec73f9.svg?generation=1771149971082755&alt=media"
@@ -60,15 +61,15 @@ export default function Home() {
 
   return (
     <div
-      className="h-full text-black text-[16px] leading-[normal]"
+      className="h-full w-full max-w-[100vw] overflow-x-hidden text-black text-[16px] leading-[normal]"
       style={{ fontFamily: 'sans-serif', textDecoration: 'none', margin: 'auto' }}
     >
       <div
         className="min-h-full bg-white text-[rgb(30,_30,_30)] text-[18px] leading-[25.92px]"
         style={{ fontFamily: 'Dmsans, Arial, sans-serif' }}
       >
-        <div className="overflow-clip w-full">
-          {/* Header - responsive with hamburger menu on mobile */}
+        <div className="">
+          {/* Header */}
           <div className="absolute w-full left-0 top-8 right-0 pt-0 px-[15px] pb-0 z-[19]">
             <div className="mx-auto w-full bg-white/50 max-w-[1164px] p-3 rounded-lg">
               <div role="banner" className="relative z-[1000]">
@@ -84,7 +85,7 @@ export default function Home() {
                     </a>
                   </div>
 
-                  {/* Desktop Navigation - hidden on mobile */}
+                  {/* Desktop Navigation */}
                   <nav
                     role="navigation"
                     className="hidden md:flex items-center gap-[40px]"
@@ -108,8 +109,8 @@ export default function Home() {
                     ))}
                   </nav>
 
-                  {/* Login/Signup Button */}
-                  <div className="flex-shrink-0">
+                  {/* Login/Signup Button - hidden on mobile */}
+                  <div className="hidden md:block flex-shrink-0">
                     <a
                       href="/login"
                       className="inline-flex font-bold items-center justify-center max-w-full overflow-hidden relative bg-[rgb(30,_30,_30)] text-white gap-0 leading-[23.94px] pt-[14px] pr-7 pb-[14px] pl-7 z-[2] rounded-lg hover:bg-gray-800 transition-colors"
@@ -118,7 +119,7 @@ export default function Home() {
                     </a>
                   </div>
 
-                  {/* Hamburger icon - visible only on mobile */}
+                  {/* Hamburger icon */}
                   <button
                     className="block md:hidden text-2xl focus:outline-none"
                     onClick={() => setMenuOpen(!menuOpen)}
@@ -127,7 +128,7 @@ export default function Home() {
                   </button>
                 </div>
 
-                {/* Mobile menu dropdown */}
+                {/* Mobile menu dropdown with login link */}
                 {menuOpen && (
                   <div className="md:hidden mt-4 bg-white rounded-lg shadow-lg p-4 flex flex-col gap-3">
                     {NAV_ITEMS.map((item) => (
@@ -148,6 +149,14 @@ export default function Home() {
                         {item.label}
                       </a>
                     ))}
+                    {/* Login/Sign Up link inside mobile menu */}
+                    <a
+                      href="/login"
+                      className="block font-medium py-2 px-3 hover:bg-gray-100 rounded text-[rgb(30,30,30)]"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Login / Sign Up
+                    </a>
                   </div>
                 )}
               </div>
@@ -220,7 +229,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Background decorative elements - hidden on mobile */}
+            {/* Background decorative elements */}
             <div className="hidden md:block pointer-events-none absolute w-[558px] h-[537px] top-[13px] right-[18%] bg-[rgba(60,135,255,0.43)] blur-[250px] z-[-1] rounded-[21.375rem]"></div>
             <div className="hidden md:block pointer-events-none absolute w-[558px] h-[537px] left-[8%] top-0 bg-[rgba(88,78,254,0.32)] blur-[250px] z-[-1] rounded-[21.375rem]"></div>
             <div className="hidden md:flex items-center justify-end pointer-events-none absolute top-[110px] right-0 max-w-[666px] z-[-1]">
