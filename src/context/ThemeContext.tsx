@@ -17,11 +17,7 @@ const themes: Theme[] = [
     name: 'Default Light',
     backgroundClass: 'bg-white',
   },
-   {
-    id: 'matrix',
-    name: 'Matrix',
-    component: dynamic(() => import('@/src/components/themes/MatrixTheme'), { ssr: false }),
-  },
+  
   {
     id: 'amber-glow',
     name: 'Top Amber Glow',

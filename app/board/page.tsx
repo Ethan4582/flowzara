@@ -14,7 +14,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeProvider } from '@/src/context/ThemeContext';
 // Theme imports (added)
 import { useTheme } from '@/src/context/ThemeContext';
-import MatrixTheme from '@/src/components/themes/MatrixTheme';
+
 import ThemeSwitcher from '@/src/components/ThemeSwitcher';
 
 /* ── Column config ── */
@@ -134,14 +134,10 @@ function BoardContent() {
   return (
     <div className="relative min-h-screen">
       {/* Background layer */}
-      {currentTheme?.id === 'matrix' ? (
-        <MatrixTheme />
-      ) : (
-        <div
+      <div
           className={`absolute inset-0 ${currentTheme?.backgroundClass || ''}`}
           style={currentTheme?.backgroundStyle}
         />
-      )}
 
       {/* Foreground content */}
       <div className="relative z-10 container py-6">
