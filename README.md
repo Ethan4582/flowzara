@@ -2,7 +2,7 @@
 
 Modern frontend-only Kanban Task Board with static authentication and localStorage persistence.
 
-<img src="public/preview.png" alt="Cluster Preview" style="width:100%;max-width:800px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);" />
+<img src="public/board.png" alt="Cluster Preview" style="width:100%;max-width:800px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);" />
 
 ---
 
