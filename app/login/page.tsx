@@ -15,7 +15,6 @@ export default function LoginPage() {
   const [remember, setRemember] = useState(false);
   const [error, setError] = useState('');
 
-  /* Pre-fill email from "Remember me" */
   useEffect(() => {
     const saved = getItem<string | null>(REMEMBER_KEY, null);
     if (saved) {
@@ -24,7 +23,6 @@ export default function LoginPage() {
     }
   }, []);
 
-  /* Redirect if already logged in */
   useEffect(() => {
     if (isAuthenticated) router.replace('/board');
   }, [isAuthenticated, router]);

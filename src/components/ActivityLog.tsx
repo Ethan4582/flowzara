@@ -7,7 +7,7 @@ interface ActivityLogProps {
   activities: Activity[];
 }
 
-/** Scrollable list of recent board actions presented as a card */
+
 export default function ActivityLog({ activities }: ActivityLogProps) {
   if (activities.length === 0) {
     return (

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import type { Task, Priority, ColumnId } from '@/src/types';
 
 interface TaskFormProps {
-  task?: Task | null;            // null → create mode
+  task?: Task | null;            
   defaultColumn?: ColumnId;
   onSubmit: (data: {
     title: string;
@@ -17,7 +17,6 @@ interface TaskFormProps {
   onCancel: () => void;
 }
 
-/** Modal form for creating / editing a task */
 export default function TaskForm({
   task = null,
   defaultColumn = 'todo',
@@ -35,7 +34,7 @@ export default function TaskForm({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    /* validation */
+  
     if (!title.trim()) {
       setError('Title is required.');
       return;

@@ -9,11 +9,10 @@ import React, {
 } from 'react';
 import { getItem, setItem, removeItem } from '@/src/utils/storage';
 
-/* ── hardcoded credentials ── */
+
 const VALID_EMAIL = 'intern@demo.com';
 const VALID_PASSWORD = 'intern123';
 
-/* ── localStorage keys ── */
 const AUTH_KEY = 'flowzara_auth';
 export const REMEMBER_KEY = 'flowzara_remember';
 
@@ -33,7 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [email, setEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  /* Hydrate auth state from localStorage on mount */
+ 
   useEffect(() => {
     const stored = getItem<{ email: string } | null>(AUTH_KEY, null);
     if (stored?.email) {

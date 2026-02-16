@@ -13,7 +13,7 @@ interface SearchFilterProps {
   onReset: () => void;
 }
 
-/** Search, priority filter, sort toggle, and reset controls */
+
 export default function SearchFilter({
   search,
   onSearchChange,

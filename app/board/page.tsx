@@ -12,19 +12,18 @@ import SearchFilter from '@/src/components/SearchFilter';
 import ActivityLog from '@/src/components/ActivityLog';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeProvider } from '@/src/context/ThemeContext';
-// Theme imports (added)
+
 import { useTheme } from '@/src/context/ThemeContext';
 
 import ThemeSwitcher from '@/src/components/ThemeSwitcher';
 
-/* ── Column config ── */
 const COLUMNS: { id: ColumnId; title: string }[] = [
   { id: 'todo', title: 'Todo' },
   { id: 'doing', title: 'Doing' },
   { id: 'done', title: 'Done' },
 ];
 
-/** Sort helper — empty dueDates pushed last */
+
 function sortByDue(a: Task, b: Task): number {
   if (!a.dueDate && !b.dueDate) return 0;
   if (!a.dueDate) return 1;
@@ -38,7 +37,7 @@ function BoardContent() {
   const router = useRouter();
   const { currentTheme } = useTheme();
 
-  /* ── UI state ── */
+
   const [search, setSearch] = useState('');
   const [priorityFilter, setPriorityFilter] = useState<Priority | 'all'>('all');
   const [sortDue, setSortDue] = useState(false);
@@ -46,10 +45,10 @@ function BoardContent() {
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [defaultCol, setDefaultCol] = useState<ColumnId>('todo');
 
-  // hover popover state for activity log
+
   const [showActivityPopover, setShowActivityPopover] = useState(false);
 
-  /* ── Filtered & sorted tasks per column ── */
+ 
   const columnTasks = useMemo(() => {
     let tasks = state.tasks;
 
@@ -69,7 +68,7 @@ function BoardContent() {
     return map;
   }, [state.tasks, search, priorityFilter, sortDue]);
 
-  /* ── Handlers ── */
+
   const handleAddTask = useCallback((col: ColumnId) => {
     setEditingTask(null);
     setDefaultCol(col);
@@ -114,7 +113,7 @@ function BoardContent() {
     router.push('/login');
   }, [logout, router]);
 
-  /* ── Drag & Drop (HTML5) ── */
+
   const handleDragStart = useCallback((e: React.DragEvent, taskId: string) => {
     e.dataTransfer.setData('text/plain', taskId);
     e.dataTransfer.effectAllowed = 'move';
@@ -133,13 +132,12 @@ function BoardContent() {
 
   return (
     <div className="relative min-h-screen">
-      {/* Background layer */}
+     
       <div
           className={`absolute inset-0 ${currentTheme?.backgroundClass || ''}`}
           style={currentTheme?.backgroundStyle}
         />
 
-      {/* Foreground content */}
       <div className="relative z-10 container py-6">
         {/* ── Header ── */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
@@ -151,10 +149,10 @@ function BoardContent() {
           </div>
 
           <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-            {/* ThemeSwitcher before Activity Log */}
+        
             <ThemeSwitcher />
 
-            {/* Activity Log: hover popover */}
+    
             <div
               style={{ position: 'relative', display: 'inline-block' }}
               onMouseEnter={() => setShowActivityPopover(true)}
@@ -189,7 +187,7 @@ function BoardContent() {
                       zIndex: 60,
                     }}
                   >
-                    {/* ActivityLog provides the card and scroll handling */}
+                   
                     <ActivityLog activities={state.activities} />
                   </motion.div>
                 )}
@@ -202,7 +200,6 @@ function BoardContent() {
           </div>
         </div>
 
-        {/* ── Controls ── */}
         <SearchFilter
           search={search}
           onSearchChange={setSearch}
@@ -213,7 +210,6 @@ function BoardContent() {
           onReset={handleReset}
         />
 
-        {/* ── Board columns ── */}
         <div className="board">
           {COLUMNS.map((col) => (
             <Column
@@ -230,7 +226,7 @@ function BoardContent() {
           ))}
         </div>
 
-        {/* ── Task Form Modal ── */}
+      
         {formOpen && (
           <TaskForm
             task={editingTask}

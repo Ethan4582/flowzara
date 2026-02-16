@@ -7,7 +7,6 @@ import { getItem, setItem } from '@/src/utils/storage';
 const BOARD_KEY = 'flowzara_board';
 const MAX_ACTIVITIES = 50;
 
-/* ── helpers ── */
 
 function uid(): string {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
@@ -21,8 +20,6 @@ function log(activities: Activity[], message: string): Activity[] {
 }
 
 
-/* ── actions ── */
-
 export type BoardAction =
   | { type: 'CREATE_TASK'; payload: Omit<Task, 'id' | 'createdAt'> }
   | { type: 'EDIT_TASK'; payload: { id: string; updates: Partial<Task> } }
@@ -32,8 +29,6 @@ export type BoardAction =
   | { type: 'HYDRATE'; payload: BoardState };
 
 const initialState: BoardState = { tasks: [], activities: [] };
-
-/* ── reducer ── */
 
 function boardReducer(state: BoardState, action: BoardAction): BoardState {
   switch (action.type) {
@@ -78,7 +73,7 @@ function boardReducer(state: BoardState, action: BoardAction): BoardState {
   }
 }
 
-/* ── context ── */
+
 
 interface BoardContextType {
   state: BoardState;
@@ -93,7 +88,6 @@ export function BoardProvider({ children }: { children: React.ReactNode }) {
 
   
 
-  /* Hydrate once from localStorage */
   useEffect(() => {
     const stored = getItem<BoardState | null>(BOARD_KEY, null);
     if (stored && Array.isArray(stored.tasks)) {
@@ -102,7 +96,7 @@ export function BoardProvider({ children }: { children: React.ReactNode }) {
     hydrated.current = true;
   }, []);
 
-  /* Persist on every change (skip until hydrated) */
+
   useEffect(() => {
     if (hydrated.current) setItem(BOARD_KEY, state);
   }, [state]);

@@ -15,7 +15,9 @@ const themes: Theme[] = [
   {
     id: 'default',
     name: 'Default Light',
-    backgroundClass: 'bg-white',
+    backgroundStyle: {
+      backgroundImage: `radial-gradient(125% 125% at 50% 10%, #fff 40%, #6366f1 100%)`,
+    },
   },
   
   {

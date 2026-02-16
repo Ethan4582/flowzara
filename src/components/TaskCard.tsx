@@ -9,7 +9,7 @@ interface TaskCardProps {
   onDelete: (id: string, title: string) => void;
 }
 
-/** Single task card — styled via global.css classes */
+
 export default function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
   const priorityBadgeColor =
     task.priority === 'high'
@@ -20,7 +20,7 @@ export default function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
 
   return (
     <div className={`task priority-${task.priority}`}>
-      {/* header row */}
+    
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
         <strong style={{ fontSize: 14, flex: 1 }}>{task.title}</strong>
         <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
@@ -41,14 +41,14 @@ export default function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
         </div>
       </div>
 
-      {/* description */}
+   
       {task.description && (
         <p className="small" style={{ margin: '4px 0 0' }}>
           {task.description}
         </p>
       )}
 
-      {/* meta row */}
+    
       <div className="meta">
         <span
           style={{
