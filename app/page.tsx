@@ -7,13 +7,26 @@ import PricingPage from '@/src/components/Landingpage/pricing';
 
 export default function LandingPage() {
   return (
-    <div >
-      <Home />
-        <FeaturesPage/>
-         <AboutPage/>
-         <PricingPage/>
-         <Footer/>
-    
+    <div>
+      <section id="Home">
+        <Home />
+      </section>
+
+      <section id="Feature">
+        <FeaturesPage />
+      </section>
+
+      <section id="About">
+        <AboutPage />
+      </section>
+
+      <section id="Pricing">
+        <PricingPage />
+      </section>
+
+      <section id="Cta">
+        <Footer />
+      </section>
     </div>
   );
 }

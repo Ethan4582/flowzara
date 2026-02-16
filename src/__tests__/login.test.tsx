@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { AuthProvider, useAuth } from '@/src/context/AuthContext';
 
-/* Minimal test component that exposes auth actions */
 function LoginHarness() {
   const { isAuthenticated, email, login, logout } = useAuth();
   const [error, setError] = React.useState('');

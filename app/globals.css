@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ── Fonts (provided) ── */
+
 @font-face {
   font-display: swap;
   font-family: 'Dmsans';
@@ -38,7 +38,7 @@
   src: url('https://storage.googleapis.com/download/storage/v1/b/prd-shared-services.firebasestorage.app/o/h2m-assets%2F65cb79753017741ff95b1ecd1689d56e96e2edbd?generation=1771149969432521&alt=media') format('woff2');
 }
 
-/* ── Theme variables ── */
+
 :root {
   --color-primary: #2563eb;
   --color-primary-600: #1d4ed8;
@@ -61,7 +61,7 @@
   --shadow-md: 0 6px 18px rgba(15,23,42,0.08);
 }
 
-/* ── Reset & base ── */
+
 * { box-sizing: border-box; }
 html, body, #root {
   height: 100%;
@@ -82,7 +82,7 @@ body {
   font-size: 14px;
 }
 
-/* ── Utilities ── */
+
 .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
 .flex { display: flex; }
 .col { display: flex; flex-direction: column; }
@@ -141,7 +141,6 @@ body {
   font-weight: 700;
 }
 
-/* ── Task card ── */
 .task {
   background: var(--card);
   border-radius: 8px;
@@ -167,7 +166,7 @@ body {
 .priority-medium { border-left-color: var(--prio-medium); }
 .priority-high { border-left-color: var(--prio-high); }
 
-/* ── Controls ── */
+
 .controls {
   display: flex;
   gap: 12px;
@@ -191,7 +190,7 @@ body {
   box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
 }
 
-/* ── Activity log ── */
+
 .activity {
   max-height: 200px;
   overflow-y: auto;
@@ -200,11 +199,10 @@ body {
   color: var(--text-weak);
 }
 
-/* ── Small helpers ── */
+
 .small { font-size: 12px; color: var(--text-weak); }
 .muted { color: var(--muted); }
 
-/* ── Auth forms ── */
 .auth-page {
   min-height: 100vh;
   display: flex;

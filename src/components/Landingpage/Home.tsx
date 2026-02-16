@@ -1,14 +1,15 @@
 "use client";
 
 import React, { useState } from 'react';
-import heroImage from '../../assets/mobile.png'; 
+import heroImage from '../../assets/mobile.png';
+import Link from "next/link";
 
 const NAV_ITEMS = [
-  { label: 'Home', href: '/' },
-  { label: 'Features', href: '/#Feature' },
-  { label: 'About', href: '/#About' },
-  { label: 'Pricing', href: '/#Pricing' },
-  { label: 'Contact', href: '/#Cta' },
+  { label: 'Home', href: '#Home' },
+  { label: 'Features', href: '#Feature' },
+  { label: 'About', href: '#About' },
+  { label: 'Pricing', href: '#Pricing' },
+  { label: 'Contact', href: '#Cta' },
 ];
 
 const MARQUEE_ROW_1 = [
@@ -28,7 +29,6 @@ const MARQUEE_ROW_2 = [
 ];
 
 const HeroImages = () => (
- 
   <div className="flex justify-center md:justify-end">
     <img
       alt="Hero Image"
@@ -41,41 +41,51 @@ const HeroImages = () => (
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  function handleNavClick(e: React.MouseEvent, href: string) {
+    if (!href.startsWith('#')) return;
+    e.preventDefault();
+    const id = href.slice(1);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setMenuOpen(false);
+  }
+
   return (
-    <div
-      className="h-full w-full max-w-[100vw] overflow-x-hidden text-black text-[16px] leading-[normal]"
-      style={{ fontFamily: 'sans-serif', textDecoration: 'none', margin: 'auto' }}
+    <div className="h-full w-full max-w-[100vw] overflow-x-hidden text-black text-[16px] leading-[normal]"
+         style={{ fontFamily: 'sans-serif', textDecoration: 'none', margin: 'auto' }}
     >
-      <div
-        className="min-h-full bg-white text-[rgb(30,_30,_30)] text-[18px] leading-[25.92px]"
-        style={{ fontFamily: 'Dmsans, Arial, sans-serif' }}
+     
+      <style>{`
+        .marquee { width: 100%; overflow: hidden; }
+        .marquee-track { display: inline-flex; align-items: center; gap: 40px; width: max-content; will-change: transform; animation: marquee 20s linear infinite; }
+        .marquee-track.reverse { animation-direction: reverse; }
+        @media (min-width: 768px) { .marquee-track { gap: 75px; } }
+        @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
+      `}</style>
+
+      <div className="min-h-full bg-white text-[rgb(30,_30,_30)] text-[18px] leading-[25.92px]"
+           style={{ fontFamily: 'Dmsans, Arial, sans-serif' }}
       >
         <div className="w-full overflow-x-hidden overflow-y-visible">
-          {/* Header */}
+         
           <div className="absolute w-full left-0 top-8 right-0 pt-0 px-[15px] pb-0 z-[19]">
             <div className="mx-auto w-full bg-white/50 max-w-[1164px] p-3 rounded-lg">
               <div role="banner" className="relative z-[1000]">
                 <div className="flex items-center justify-between gap-4">
-                  {/* Logo */}
+               
                   <div className="flex-shrink-0">
                     <a href="/" aria-label="home" className="block text-[rgb(51,_51,_51)]">
-                      <img
-                        alt="Logo"
-                        src="https://storage.googleapis.com/download/storage/v1/b/prd-shared-services.firebasestorage.app/o/h2m-assets%2F539449bde20209dda1b0a4149fd3b3389c452bfc.svg?generation=1771149970869240&alt=media"
-                        className="inline-block max-w-full overflow-clip"
-                      />
+                      <img alt="Logo" src="https://storage.googleapis.com/download/storage/v1/b/prd-shared-services.firebasestorage.app/o/h2m-assets%2F539449bde20209dda1b0a4149fd3b3389c452bfc.svg?generation=1771149970869240&alt=media" className="inline-block max-w-full overflow-clip" />
                     </a>
                   </div>
 
-                  {/* Desktop Navigation */}
-                  <nav
-                    role="navigation"
-                    className="hidden md:flex items-center gap-[40px]"
-                  >
+                
+                  <nav role="navigation" className="hidden md:flex items-center gap-[40px]">
                     {NAV_ITEMS.map((item) => (
-                      <a
+                      <Link
                         key={item.label}
                         href={item.href}
+                        onClick={(e) => handleNavClick(e as any, item.href)}
                         className="block font-medium text-left align-top leading-[23.94px] whitespace-nowrap"
                         style={{
                           color:
@@ -87,36 +97,29 @@ export default function Home() {
                         }}
                       >
                         {item.label}
-                      </a>
+                      </Link>
                     ))}
                   </nav>
-
-                  {/* Login/Signup Button - hidden on mobile */}
++
                   <div className="hidden md:block flex-shrink-0">
-                    <a
-                      href="/login"
-                      className="inline-flex font-bold items-center justify-center max-w-full overflow-hidden relative bg-[rgb(30,_30,_30)] text-white gap-0 leading-[23.94px] pt-[14px] pr-7 pb-[14px] pl-7 z-[2] rounded-lg hover:bg-gray-800 transition-colors"
-                    >
+                    <a href="/login" className="inline-flex font-bold items-center justify-center max-w-full overflow-hidden relative bg-[rgb(30,_30,_30)] text-white gap-0 leading-[23.94px] pt-[14px] pr-7 pb-[14px] pl-7 z-[2] rounded-lg hover:bg-gray-800 transition-colors">
                       <div>Login / Sign Up</div>
                     </a>
                   </div>
 
-                  {/* Hamburger icon */}
-                  <button
-                    className="block md:hidden text-2xl focus:outline-none"
-                    onClick={() => setMenuOpen(!menuOpen)}
-                  >
+                  <button className="block md:hidden text-2xl focus:outline-none" onClick={() => setMenuOpen(!menuOpen)}>
                     {menuOpen ? '✕' : '☰'}
                   </button>
                 </div>
 
-                {/* Mobile menu dropdown with login link */}
+               
                 {menuOpen && (
                   <div className="md:hidden mt-4 bg-white rounded-lg shadow-lg p-4 flex flex-col gap-3">
                     {NAV_ITEMS.map((item) => (
                       <a
                         key={item.label}
                         href={item.href}
+                        onClick={(e) => handleNavClick(e as any, item.href)}
                         className="block font-medium py-2 px-3 hover:bg-gray-100 rounded"
                         style={{
                           color:
@@ -126,18 +129,11 @@ export default function Home() {
                               ? 'rgb(65, 59, 161)'
                               : 'rgb(34, 34, 34)',
                         }}
-                        onClick={() => setMenuOpen(false)}
                       >
                         {item.label}
                       </a>
                     ))}
-                    <a
-                      href="/login"
-                      className="block font-medium py-2 px-3 hover:bg-gray-100 rounded text-[rgb(30,30,30)]"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      Login / Sign Up
-                    </a>
+                    <a href="/login" className="block font-medium py-2 px-3 hover:bg-gray-100 rounded text-[rgb(30,30,30)]" onClick={() => setMenuOpen(false)}>Login / Sign Up</a>
                   </div>
                 )}
               </div>
@@ -210,7 +206,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Background decorative elements */}
+        
             <div className="hidden md:block pointer-events-none absolute w-[558px] h-[537px] top-[13px] right-[18%] bg-[rgba(60,135,255,0.43)] blur-[250px] z-[-1] rounded-[21.375rem]"></div>
             <div className="hidden md:block pointer-events-none absolute w-[558px] h-[537px] left-[8%] top-0 bg-[rgba(88,78,254,0.32)] blur-[250px] z-[-1] rounded-[21.375rem]"></div>
             <div className="hidden md:flex items-center justify-end pointer-events-none absolute top-[110px] right-0 max-w-[666px] z-[-1]">
@@ -227,60 +223,48 @@ export default function Home() {
               <div className="pt-0 px-[15px] pb-[60px] md:pb-[120px]">
                 <div className="mx-auto w-full max-w-[1140px]">
                   <div className="mb-6 md:mb-[32px]">
-                    <div className="font-medium text-center text-sm md:text-[16px] leading-[24px]">
-                      Join 4,000+ businesses driving productivity.
-                    </div>
+                    <div className="font-medium text-center text-sm md:text-[16px] leading-[24px]">Join 4,000+ businesses driving productivity.</div>
                   </div>
 
                   <div className="flex flex-col overflow-hidden gap-4 md:gap-[24px]">
-                    {/* Row 1 */}
+                 
                     <div className="marquee">
-                      <div className="marquee-track">
-                        {MARQUEE_ROW_1.map((src, idx) => (
-                          <img
-                            key={`r1-${idx}`}
-                            src={src}
-                            alt="Marquee Image"
-                            className="block max-w-full overflow-clip align-middle w-16 md:w-40"
-                          />
-                        ))}
-                        {MARQUEE_ROW_1.map((src, idx) => (
-                          <img
-                            key={`r1d-${idx}`}
-                            src={src}
-                            alt="Marquee Image"
-                            className="block max-w-full overflow-clip align-middle w-16 md:w-40"
-                          />
-                        ))}
+                      <div className="marquee-track reverse" aria-hidden="false">
+                        <div className="flex items-center justify-between gap-[40px] md:gap-[75px] shrink-0">
+                          {MARQUEE_ROW_1.map((src, idx) => (
+                            <img key={`r1-${idx}`} src={src} alt="Marquee Image" className="block max-w-full overflow-clip align-middle w-16 md:w-40" />
+                          ))}
+                        </div>
+                        <div className="flex items-center justify-between gap-[40px] md:gap-[75px] shrink-0">
+                          {MARQUEE_ROW_1.map((src, idx) => (
+                            <img key={`r1d-${idx}`} src={src} alt="Marquee Image" className="block max-w-full overflow-clip align-middle w-16 md:w-40" />
+                          ))}
+                        </div>
                       </div>
                     </div>
 
-                    {/* Row 2 */}
+                 
                     <div className="marquee">
-                      <div className="marquee-track reverse">
-                        {MARQUEE_ROW_2.map((src, idx) => (
-                          <img
-                            key={`r2-${idx}`}
-                            src={src}
-                            alt="Marquee Image"
-                            className="block max-w-full overflow-clip align-middle w-16 md:w-40"
-                          />
-                        ))}
-                        {MARQUEE_ROW_2.map((src, idx) => (
-                          <img
-                            key={`r2d-${idx}`}
-                            src={src}
-                            alt="Marquee Image"
-                            className="block max-w-full overflow-clip align-middle w-16 md:w-40"
-                          />
-                        ))}
+                      <div className="marquee-track" aria-hidden="false">
+                        <div className="flex items-center justify-between gap-[40px] md:gap-[75px] shrink-0">
+                          {MARQUEE_ROW_2.map((src, idx) => (
+                            <img key={`r2-${idx}`} src={src} alt="Marquee Image" className="block max-w-full overflow-clip align-middle w-16 md:w-40" />
+                          ))}
+                        </div>
+                        <div className="flex items-center justify-between gap-[40px] md:gap-[75px] shrink-0">
+                          {MARQUEE_ROW_2.map((src, idx) => (
+                            <img key={`r2d-${idx}`} src={src} alt="Marquee Image" className="block max-w-full overflow-clip align-middle w-16 md:w-40" />
+                          ))}
+                        </div>
                       </div>
                     </div>
+
                   </div>
                 </div>
               </div>
             </div>
           </main>
+
         </div>
       </div>
     </div>
