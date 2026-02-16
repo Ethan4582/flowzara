@@ -20,6 +20,7 @@ function log(activities: Activity[], message: string): Activity[] {
   ].slice(0, MAX_ACTIVITIES);
 }
 
+
 /* ── actions ── */
 
 export type BoardAction =
@@ -90,6 +91,8 @@ export function BoardProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(boardReducer, initialState);
   const hydrated = useRef(false);
 
+  
+
   /* Hydrate once from localStorage */
   useEffect(() => {
     const stored = getItem<BoardState | null>(BOARD_KEY, null);
@@ -116,3 +119,5 @@ export function useBoard() {
   if (!ctx) throw new Error('useBoard must be used within BoardProvider');
   return ctx;
 }
+
+

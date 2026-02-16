@@ -10,6 +10,7 @@ import Column from '@/src/components/Column';
 import TaskForm from '@/src/components/TaskForm';
 import SearchFilter from '@/src/components/SearchFilter';
 import ActivityLog from '@/src/components/ActivityLog';
+import { motion, AnimatePresence } from 'framer-motion';
 
 /* ── Column config ── */
 const COLUMNS: { id: ColumnId; title: string }[] = [
@@ -38,7 +39,9 @@ function BoardContent() {
   const [formOpen, setFormOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [defaultCol, setDefaultCol] = useState<ColumnId>('todo');
-  const [showActivity, setShowActivity] = useState(false);
+
+  // hover popover state for activity log
+  const [showActivityPopover, setShowActivityPopover] = useState(false);
 
   /* ── Filtered & sorted tasks per column ── */
   const columnTasks = useMemo(() => {
@@ -132,13 +135,50 @@ function BoardContent() {
             Signed in as <strong>{email}</strong>
           </p>
         </div>
-        <div style={{ display: 'flex', gap: 8 }}>
-          <button
-            className={`btn ${showActivity ? '' : 'secondary'}`}
-            onClick={() => setShowActivity(!showActivity)}
+
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          {/* Activity Log: hover popover */}
+          <div
+            style={{ position: 'relative', display: 'inline-block' }}
+            onMouseEnter={() => setShowActivityPopover(true)}
+            onMouseLeave={() => setShowActivityPopover(false)}
+            aria-haspopup="true"
+            aria-expanded={showActivityPopover}
           >
-            Activity Log
-          </button>
+            <button
+              className="btn secondary"
+              style={{
+                transition: 'background-color 140ms, color 140ms',
+                background: showActivityPopover ? 'var(--color-primary)' : undefined,
+                color: showActivityPopover ? 'var(--text-inverse)' : undefined,
+                borderColor: showActivityPopover ? 'transparent' : undefined,
+              }}
+            >
+              Activity Log
+            </button>
+
+            <AnimatePresence>
+              {showActivityPopover && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                  transition={{ duration: 0.12 }}
+                  style={{
+                    position: 'absolute',
+                    right: 0,
+                    top: 'calc(100% + 8px)',
+                    width: 320,
+                    zIndex: 60,
+                  }}
+                >
+                  {/* let ActivityLog render the white card & handle scrolling to avoid nested padding/scrollbars */}
+                  <ActivityLog activities={state.activities} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           <button className="btn secondary" onClick={handleLogout}>
             Logout
           </button>
@@ -156,13 +196,7 @@ function BoardContent() {
         onReset={handleReset}
       />
 
-      {/* ── Activity Log (collapsible) ── */}
-      {showActivity && (
-        <div className="card" style={{ marginTop: 16 }}>
-          <strong style={{ fontSize: 13 }}>Recent Activity</strong>
-          <ActivityLog activities={state.activities} />
-        </div>
-      )}
+      {/* Previously displayed activity card removed — replaced by hover popover above */}
 
       {/* ── Board columns ── */}
       <div className="board">

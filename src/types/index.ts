@@ -28,3 +28,5 @@ export interface BoardState {
   tasks: Task[];
   activities: Activity[];
 }
+
+

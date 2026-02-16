@@ -30,7 +30,7 @@ const Footer = () => {
                 {/* Social Icons */}
                 <div className="flex items-center justify-start mb-9 gap-6">
                   <a
-                    href="https://www.instagram.com/"
+                    href="https://ash-cv.vercel.app/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-start gap-6"
@@ -43,22 +43,9 @@ const Footer = () => {
                       />
                     </div>
                   </a>
+                  
                   <a
-                    href="https://www.facebook.com/shijemGG/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-start gap-6"
-                  >
-                    <div className="w-6 h-6 overflow-hidden">
-                      <img
-                        src="https://storage.googleapis.com/download/storage/v1/b/prd-shared-services.firebasestorage.app/o/h2m-assets%2Fa415527f6cfbda54e780cf60c0dce79b7c68a52b.svg?generation=1771149971898822&amp;alt=media"
-                        alt="Facebook"
-                        className="w-full h-full block"
-                      />
-                    </div>
-                  </a>
-                  <a
-                    href="https://x.com/flowsamurai_"
+                    href="https://x.com/SinghAshir65848"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-start gap-6"
@@ -72,7 +59,7 @@ const Footer = () => {
                     </div>
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/markojurisicc/"
+                    href="https://www.linkedin.com/in/ashirwad08singh/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-start gap-6"
@@ -161,7 +148,7 @@ const Footer = () => {
                       singhashirwad2003@gmail.com
                     </a>
                     <p className="text-base leading-7 max-w-[229px]">
-                      6391 Elgin St. Celina, Delaware 10299
+                      Mumbai , India
                     </p>
                   </div>
                 </div>
